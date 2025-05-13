@@ -81,7 +81,7 @@
                     <ol class="list list--fields response__submission__content">
                         {% for part in saved_response.answer.parts %}
                             <li class="submission__answer__part">
-                                <h5 class="submission__answer__part__text__title">{% trans "The prompt for this section" %}</h5>
+                                <h5 class="submission__answer__part__text__title">{% trans "The question for this section" %}</h5>
                                 <article class="submission__answer__part__prompt">
                                     <div class="submission__answer__part__prompt__copy">
                                         {% if prompts_type == 'html' %}
@@ -136,7 +136,7 @@
                                         class="submission__answer__part__text__value"
                                         data-preview="submission__{{ forloop.counter }}"
                                         aria-labelledby="submission__answer__part__text__title__{{ forloop.counter }}__{{ xblock_id }}"
-                                        placeholder="{% trans "Enter your response to the prompt above." %}"
+                                        placeholder="{% trans "Enter your response to the question above." %}"
                                         maxlength="100000"
                                     >{{ part.text }}</textarea>
                                 </div>
