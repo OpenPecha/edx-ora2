@@ -60,57 +60,7 @@
     {% block body %}
     <div class="ui-slidable__content" aria-labelledby="oa_response_{{ xblock_id }}" id="oa_response_{{ xblock_id }}_content">
         <div class="wrapper--step__content">
-            <div class="step__instruction">
-                <p>
-                  {% if team_name %}
-                    {% trans "Enter your team's response to the prompt." %}
-                    {% if submission_due %}
-                      {% blocktrans %}
-                        Your work will save automatically and you can return to complete your team's response at any time before the due date
-                      {% endblocktrans %}
-                      (<span class="step__deadline">
-                        <span id="oa_step_deadline_response"
-                          class="date ora-datetime"
-                          data-datetime="{{ submission_due|timezone:'UTC'|date:'c' }}"
-                          data-timezone="{{ user_timezone }}"
-                          data-format="longDateTime"
-                          data-language="{{ user_language }}">
-                        </span>
-                      </span>).
-                    {% else %}
-                      {% blocktrans %}
-                        Your work will save automatically and you can return to complete your team's response at any time.
-                      {% endblocktrans %}
-                    {% endif %}
-                    <strong class="emphasis">
-                      {% trans "After you submit a response on behalf of your team, it cannot be edited." %}
-                    </strong>
-                  {% else %}
-                    {% trans "Enter your response to the prompt." %}
-                    {% if submission_due %}
-                      {% if date_config_type == 'subsection' %}
-                        {% trans "Your work will save automatically and you can return to complete your response at any time before the subsection due date " %}
-                      {% elif date_config_type == 'course_end' %}
-                        {% trans "Your work will save automatically and you can return to complete your response at any time before the course ends " %}
-                      {% else %}
-                        {% trans "Your work will save automatically and you can return to complete your response at any time before the due date " %}
-                      {% endif %}
-                      (<span class="step__deadline">
-                          <span id="oa_step_deadline_response"
-                            class="date ora-datetime"
-                            data-datetime="{{ submission_due|timezone:'UTC'|date:'c' }}"
-                            data-timezone="{{ user_timezone }}"
-                            data-format="longDateTime"
-                            data-language="{{ user_language }}">
-                          </span>
-                      </span>).
-                    {% else %}
-                      {% trans "Your work will save automatically and you can return to complete your response at any time." %}
-                    {% endif %}
-                    <strong class="emphasis">{% trans "After you submit your response, you cannot edit it" %}</strong>.
-                  {% endif %}
-                </p>
-            </div>
+
             {% if show_rubric_during_response %}
                 <div class="step__rubric">
                     <div class="rubric_display_container ui-slidable__container is--initially--collapsed" id="read_only_rubric_container">
@@ -179,15 +129,7 @@
                                             {% trans "(Optional)" %}
                                           {% endif %}
                                         </h5>
-                                        {% if team_name %}
-                                          {% blocktrans %}
-                                              Teams should designate one team member to submit a response on behalf of the
-                                              entire team.  All team members can use this space to work on draft responses,
-                                              but you will not be able to see your teammates' drafts made in this space, so
-                                              please coordinate with them to decide on the final response the designated team
-                                              member should submit.
-                                          {% endblocktrans %}
-                                        {% endif %}
+
                                     </div>
                                     <textarea
                                         id="submission__answer__part__text__{{ forloop.counter }}__{{ xblock_id }}"
