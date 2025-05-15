@@ -15,6 +15,7 @@
         {% endif %}
 
         <div class="wrapper-openassessment__message">
+          {% block message %}
           <div class="openassessment__message message">
             <div class="message__content">
               <p>
@@ -22,6 +23,7 @@
               </p>
             </div>
           </div>
+          {% endblock %}
         </div>
 
         <ol class="openassessment__steps">
