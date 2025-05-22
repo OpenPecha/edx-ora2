@@ -9,7 +9,7 @@
                 {% endblocktrans %}
             {% else %}
                 {% blocktrans with start_tag="<strong>"|safe end_tag="</strong>"|safe %}
-                    Please respond to the question below. Your response will be saved automatically and <strong>cannot be edited once submitted</strong>.
+                    Please respond to the question below. Your response will be saved automatically and {{ start_tag }}cannot be edited once submitted{{ end_tag }}.
                 {% endblocktrans %}
             {% endif %}
         </p>
