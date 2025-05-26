@@ -3254,3 +3254,16 @@ msgstr ""
 #: xblock/utils/validation.py:392
 msgid "The submission format is invalid."
 msgstr "El formato del envío es inválido"
+
+
+# ---- Updated strings----
+
+msgid ""
+"\n"
+"                    Please respond to the question below. Your response will be saved automatically and %(start_tag)scannot be edited once submitted%(end_tag)s.\n"
+"                "
+msgstr ""
+"\n                    Por favor, responda a la pregunta a continuación. Su respuesta se guardará automáticamente y %(start_tag)no podrá ser editada una vez enviada%(end_tag)s."
+
+msgid "Enter your response to the question above."
+msgstr "Ingrese su respuesta a la pregunta anterior."
