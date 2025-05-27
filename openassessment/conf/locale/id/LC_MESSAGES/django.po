@@ -2515,3 +2515,16 @@ msgstr "Nomor Papan Skor tidak benar"
 #: xblock/utils/validation.py:379
 msgid "The submission format is invalid."
 msgstr "Format pengajuan tidak valid."
+
+
+# ---- Updated strings----
+
+msgid ""
+"\n"
+"                    Please respond to the question below. Your response will be saved automatically and %(start_tag)scannot be edited once submitted%(end_tag)s.\n"
+"                "
+msgstr ""
+"\n                    Harap jawab pertanyaan di bawah ini. Jawaban Anda akan disimpan secara otomatis dan %(start_tag)tidak dapat diedit setelah dikirim%(end_tag)s."
+
+msgid "Enter your response to the question above."
+msgstr "Masukkan jawaban Anda untuk pertanyaan di atas."
