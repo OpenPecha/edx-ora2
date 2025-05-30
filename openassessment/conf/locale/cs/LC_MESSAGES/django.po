@@ -2518,3 +2518,18 @@ msgstr "Číslo žebříčku je neplatné."
 #: xblock/utils/validation.py:379
 msgid "The submission format is invalid."
 msgstr "Formát odeslání je neplatný."
+
+
+# ---- Updated strings ----
+
+msgid ""
+"\n"
+"                    Please respond to the question below. Your response will be saved automatically and %(start_tag)scannot be edited once submitted%(end_tag)s.\n"
+"                "
+msgstr ""
+"\n"
+"                    Odpovězte prosím na následující otázku. Vaše odpověď bude automaticky uložena a %(start_tag)spo odeslání ji již nepůjde upravit%(end_tag)s.\n"
+"                "
+
+msgid "Enter your response to the question above."
+msgstr "Zadejte svou odpověď na výše uvedenou otázku."
