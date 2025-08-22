@@ -116,7 +116,7 @@
                         {% for part in saved_response.answer.parts %}
                             <li class="submission__answer__part">
                                 <h5 class="submission__answer__part__text__title">{% trans "Question for this section." %}</h5>
-                                <article class="submission__answer__part__prompt" style="background: white !important; background-color: white !important; box-shadow: 0 1px 1px rgba(0,0,0,0.05) !important; border: 1px solid #ddd !important; padding: 10px !important; margin-bottom: 10px !important; border-radius: 3px !important;">
+                                <article class="submission__answer__part__prompt" style="background: white !important; background-color: white !important; box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important; border: 1px solid #bbb !important; border-left: 7px solid #0075B4 !important; padding: 10px !important; margin-bottom: 10px !important; border-radius: 0px !important;">
                                     <div class="submission__answer__part__prompt__copy" style="background: white !important; padding: 0 !important; margin: 0 !important;">
                                         {% if prompts_type == 'html' %}
                                             {{ part.prompt.description|safe }}
@@ -159,7 +159,7 @@
                                         aria-label="{% trans "Response to the question above" %}"
                                         placeholder="{% trans "Enter your response. It saves automatically and can’t be edited once submitted." %}"
                                         maxlength="100000"
-                                        style="border: 1px solid #ccc !important; padding: 8px !important; min-height: 150px !important; background-color: white !important;"
+                                        style="border: 1px solid #bbb !important; padding: 8px !important; min-height: 150px !important; background-color: white !important; box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;"
                                     >{{ part.text }}</textarea>
                                 </div>
                                 {% with forloop.counter|stringformat:"s" as submission_num %}
