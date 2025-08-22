@@ -141,11 +141,13 @@ li.step--response::before {
 
 /* Style the question box with a border but white background */
 .openassessment .submission__answer__part__prompt,
-.openassessment .step__content .submission__answer__part__prompt {
+.openassessment .step__content .submission__answer__part__prompt,
+article.submission__answer__part__prompt {
     background: white !important;
     background-color: white !important;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.05) !important;
-    border: 1px solid #ddd !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+    border: 1px solid #bbb !important;
+    border-left: 7px solid #999 !important;
     padding: 10px !important;
     margin-bottom: 10px !important;
     border-radius: 3px !important;
@@ -159,10 +161,11 @@ li.step--response::before {
 
 /* Style the textarea with a light border for usability */
 .openassessment textarea.submission__answer__part__text__value {
-    border: 1px solid #ccc !important;
+    border: 1px solid #bbb !important;
     padding: 8px !important;
     min-height: 150px !important;
     background-color: white !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
 }
 
 /* Fix placeholder opacity */
