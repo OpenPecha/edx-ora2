@@ -14,7 +14,6 @@
 {% block title %}
 <span class="step__status">
   <span id="oa_step_status_peer" class="step__status__value">
-    <span class="icon fa fa-check" aria-hidden="true"></span>
     <span class="copy">
       {% with graded_string=graded|stringformat:"s" %}
       {% blocktrans with num_graded='<span class="step__status__value--completed">'|safe|add:graded_string|add:'</span>'|safe %}
