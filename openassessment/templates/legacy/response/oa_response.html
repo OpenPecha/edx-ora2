@@ -1,9 +1,58 @@
 {% load tz %}
 {% load i18n %}
 {% spaceless %}
+<style>
+    .submission__answer__part__text__value::placeholder {
+        opacity: 0.3;
+    }
+    
+    /* Target the blue progress line */
+    .openassessment__steps__step.step--response.is--in-progress {
+        border-top: none !important;
+    }
+    
+    /* Target the blue progress bar */
+    .in-progress {
+        display: none !important;
+    }
+    
+    /* Custom class to remove blue line */
+    .no-blue-line {
+        border-top: 0 !important;
+        border-top-width: 0 !important;
+        border-top-color: transparent !important;
+    }
+    
+    /* Move the IN PROGRESS tag down and make it green */
+    .step__status {
+        margin-top: 10px !important;
+        display: block !important;
+    }
+    
+    /* Make only the IN PROGRESS tag green by targeting it directly */
+    #oa_step_status_response .copy {
+        color: #008100 !important;
+        background-color: #e6f9e6 !important;
+        padding: 3px 8px !important;
+        border-radius: 3px !important;
+        font-weight: bold !important;
+    }
+    
+    /* Override any blue backgrounds only for this specific tag */
+    #oa_step_status_response {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+    
+    /* Only remove blue background from the IN PROGRESS tag */
+    .step--response.is--in-progress .step__status__value,
+    .step--response.is--in-progress .step__status__value .copy {
+        background: transparent !important;
+    }
+</style>
 {% block list_item %}
 <li class="openassessment__steps__step step--response is--in-progress is--showing ui-slidable__container"
-    tabindex="-1">
+    tabindex="-1" style="border-top: 1px solid #ddd !important;">
 {% endblock %}
 
     <header class="step__header ui-slidable__control">
@@ -49,7 +98,7 @@
         </span>
         {% endif %}
         {%  block title %}
-        <span class="step__status">
+        <span class="step__status" style="margin-top: 15px; display: block; clear: both;">
             <span id="oa_step_status_response" class="step__status__value">
                 <span class="copy">{% trans "In Progress" %}</span>
             </span>
@@ -77,13 +126,13 @@
                 </div>
             {% endif %}
             <div class="step__content" data-base-asset-url="{{ base_asset_url }}">
-                <form class="response__submission">
-                    <ol class="list list--fields response__submission__content">
+                <form class="response__submission" style="background: white !important; padding: 0 !important; border-radius: 0 !important;">
+                    <ol class="list list--fields response__submission__content" style="background: white !important; padding: 0 !important;">
                         {% for part in saved_response.answer.parts %}
                             <li class="submission__answer__part">
-                                <h5 class="submission__answer__part__text__title">{% trans "The question for this section" %}</h5>
-                                <article class="submission__answer__part__prompt">
-                                    <div class="submission__answer__part__prompt__copy">
+                                <h5 class="submission__answer__part__text__title">{% trans "Question" %}</h5>
+                                <article class="submission__answer__part__prompt" style="background: white !important; background-color: white !important; box-shadow: 0 1px 1px rgba(0,0,0,0.05) !important; border: 1px solid #ddd !important; padding: 10px !important; margin-bottom: 10px !important; border-radius: 3px !important;">
+                                    <div class="submission__answer__part__prompt__copy" style="background: white !important; padding: 0 !important; margin: 0 !important;">
                                         {% if prompts_type == 'html' %}
                                             {{ part.prompt.description|safe }}
                                         {% else %}
@@ -115,29 +164,17 @@
                                 {% if text_response %}
                                 <div class="field field--textarea submission__answer__part__text">
                                     <div class="submission__answer__part__text">
-                                        <h5 id="submission__answer__part__text__title__{{ forloop.counter }}__{{ xblock_id }}"
-                                            class="submission__answer__part__text__title">
-                                          {% if team_name %}
-                                            {% trans "Team Response " %}
-                                          {% else %}
-                                            {% trans "Your Response " %}
-                                          {% endif %}
-
-                                          {% if text_response == "required" %}
-                                            {% trans "(Required)" %}
-                                          {% elif text_response == "optional" %}
-                                            {% trans "(Optional)" %}
-                                          {% endif %}
-                                        </h5>
+                                        <!-- Response title removed -->
 
                                     </div>
                                     <textarea
                                         id="submission__answer__part__text__{{ forloop.counter }}__{{ xblock_id }}"
                                         class="submission__answer__part__text__value"
                                         data-preview="submission__{{ forloop.counter }}"
-                                        aria-labelledby="submission__answer__part__text__title__{{ forloop.counter }}__{{ xblock_id }}"
+                                        aria-label="{% trans "Response to the question above" %}"
                                         placeholder="{% trans "Enter your response to the question above." %}"
                                         maxlength="100000"
+                                        style="border: 1px solid #ccc !important; padding: 8px !important; min-height: 150px !important; background-color: white !important;"
                                     >{{ part.text }}</textarea>
                                 </div>
                                 {% with forloop.counter|stringformat:"s" as submission_num %}
@@ -272,7 +309,7 @@
                                 file_upload_response="{{file_upload_response}}"
                                 allow_learner_resubmissions="{{allow_learner_resubmissions}}"
                                 >
-                            {% trans "Submit your response and move to the next step" %}
+                            {% trans "Submit your Response" %}
                         </button>
                     </li>
                 </ul>
