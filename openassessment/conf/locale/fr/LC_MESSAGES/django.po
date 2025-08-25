@@ -2546,3 +2546,18 @@ msgstr "Le numéro associé au tableau de classement des étudiants est invalide
 #: xblock/utils/validation.py:379
 msgid "The submission format is invalid."
 msgstr "Le format de la réponse est invalide."
+
+
+# ---- Updated strings ----
+
+msgid ""
+"\n"
+"                    Please respond to the question below. Your response will be saved automatically and %(start_tag)scannot be edited once submitted%(end_tag)s.\n"
+"                "
+msgstr ""
+"\n"
+"                    Veuillez répondre à la question ci-dessous. Votre réponse sera enregistrée automatiquement et %(start_tag)sne pourra plus être modifiée après soumission%(end_tag)s.\n"
+"                "
+
+msgid "Enter your response to the question above."
+msgstr "Saisissez votre réponse à la question ci-dessus."
