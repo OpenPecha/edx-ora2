@@ -44,7 +44,7 @@ def staff_context(api_data):
     translate = api_data.config_data.translate
 
     not_available_context = {
-        "status_value": translate("Not Available"),
+        "status_value": translate("Pending Submission"),
         "button_active": "disabled=disabled aria-expanded=false",
         "step_classes": "is--unavailable",
     }
@@ -68,7 +68,7 @@ def staff_context(api_data):
         # (because if a staff grade did exist, we would be in 'done' regardless of whether other
         # peers have assessed). Therefore we show that we are waiting on staff to provide a grade.
         context = {
-            "status_value": translate("Not Available"),
+            "status_value": translate("Pending Staff Assessment"),
             "message_title": translate("Waiting for a Staff Grade"),
             "message_content": translate(
                 "Check back later to see if a course staff member has assessed "
