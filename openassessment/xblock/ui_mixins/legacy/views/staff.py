@@ -32,8 +32,18 @@ def render_staff_assessment(api_data):
     Assessment XBlock. See OpenAssessmentBlock.render_assessment() for
     more information on rendering XBlock sections.
     """
-    path, context_dict = staff_path_and_context(api_data)
-    return api_data.config_data.render_assessment(path, context_dict)
+    try:
+        path, context_dict = staff_path_and_context(api_data)
+        return api_data.config_data.render_assessment(path, context_dict)
+    except Exception as ex:
+        logger.exception("Error rendering staff assessment: %s", ex)
+        # Return a minimal error template that won't break the UI
+        error_path = "legacy/staff/oa_staff_grade_error.html"
+        error_context = {
+            "error_msg": "Unable to load staff assessment. Please refresh the page.",
+            "xblock_id": api_data.config_data.get_xblock_id()
+        }
+        return api_data.config_data.render_assessment(error_path, error_context)
 
 
 def staff_context(api_data):

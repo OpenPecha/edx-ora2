@@ -29,9 +29,23 @@ export class StaffView {
         view.isRendering = false;
         view.installHandlers();
         view.baseView.announceStatusChangeToSRandFocus(stepID, usageID, false, view, focusID);
+        // Reset retry counter on success
+        view._retryCount = 0;
       },
     ).fail(() => {
-      view.baseView.showLoadError('staff-assessment');
+      // Retry up to 2 times before showing error
+      if (!view._retryCount) {
+        view._retryCount = 1;
+        console.log('Staff assessment load failed, retrying (1/2)...');
+        setTimeout(() => view.load(usageID), 1000);
+      } else if (view._retryCount === 1) {
+        view._retryCount = 2;
+        console.log('Staff assessment load failed, retrying (2/2)...');
+        setTimeout(() => view.load(usageID), 2000);
+      } else {
+        console.error('Staff assessment load failed after retries');
+        view.baseView.showLoadError('staff-assessment');
+      }
     });
   }
 
