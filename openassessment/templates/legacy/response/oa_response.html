@@ -1,9 +1,58 @@
 {% load tz %}
 {% load i18n %}
 {% spaceless %}
+<style>
+    .submission__answer__part__text__value::placeholder {
+        opacity: 0.3;
+    }
+    
+    /* Target the blue progress line */
+    .openassessment__steps__step.step--response.is--in-progress {
+        border-top: none !important;
+    }
+    
+    /* Target the blue progress bar */
+    .in-progress {
+        display: none !important;
+    }
+    
+    /* Custom class to remove blue line */
+    .no-blue-line {
+        border-top: 0 !important;
+        border-top-width: 0 !important;
+        border-top-color: transparent !important;
+    }
+    
+    /* Move the IN PROGRESS tag down and make it green */
+    .step__status {
+        margin-top: 10px !important;
+        display: block !important;
+    }
+    
+    /* Make only the IN PROGRESS tag green by targeting it directly */
+    #oa_step_status_response .copy {
+        color: #008100 !important;
+        background-color: #e6f9e6 !important;
+        padding: 3px 8px !important;
+        border-radius: 3px !important;
+        font-weight: bold !important;
+    }
+    
+    /* Override any blue backgrounds only for this specific tag */
+    #oa_step_status_response {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+    
+    /* Only remove blue background from the IN PROGRESS tag */
+    .step--response.is--in-progress .step__status__value,
+    .step--response.is--in-progress .step__status__value .copy {
+        background: transparent !important;
+    }
+</style>
 {% block list_item %}
 <li class="openassessment__steps__step step--response is--in-progress is--showing ui-slidable__container"
-    tabindex="-1">
+    tabindex="-1" style="border-top: 1px solid #ddd !important;">
 {% endblock %}
 
     <header class="step__header ui-slidable__control">
@@ -33,23 +82,8 @@
             </h4>
         </span>
 
-        {% if submission_start %}
-        <span class="step__deadline">
-            {# Translators: This string displays a date to the user, then tells them the time until that date.  Example: "available August 13th, 2014 (in 5 days and 45 minutes)" #}
-            {% blocktrans with start_date=submission_start|timezone:"UTC"|date:"c" time_until=submission_start|timeuntil %}
-            <span id="oa_step_deadline_response" class="date ora-datetime" data-datetime="{{ start_date }}" data-string="available {date} (in {{ time_until }})" data-timezone="{{ user_timezone }}" data-language="{{ user_language }}"></span>
-            {% endblocktrans %}
-        </span>
-        {% elif submission_due %}
-        <span class="step__deadline">
-            {# Translators: This string displays a date to the user, then tells them the time until that date.  Example: "due August 13th, 2014 (in 5 days and 45 minutes)" #}
-            {% blocktrans with due_date=submission_due|timezone:"UTC"|date:"c" time_until=submission_due|timeuntil %}
-            <span id="oa_step_deadline_response" class="date ora-datetime" data-datetime="{{ due_date }}" data-string="due {date} (in {{ time_until }})" data-timezone="{{ user_timezone }}" data-language="{{ user_language }}"></span>
-            {% endblocktrans %}
-        </span>
-        {% endif %}
         {%  block title %}
-        <span class="step__status">
+        <span class="step__status" style="margin-top: 15px; display: block; clear: both;">
             <span id="oa_step_status_response" class="step__status__value">
                 <span class="copy">{% trans "In Progress" %}</span>
             </span>
@@ -77,13 +111,13 @@
                 </div>
             {% endif %}
             <div class="step__content" data-base-asset-url="{{ base_asset_url }}">
-                <form class="response__submission">
-                    <ol class="list list--fields response__submission__content">
+                <form class="response__submission" style="background: white !important; padding: 0 !important; border-radius: 0 !important;">
+                    <ol class="list list--fields response__submission__content" style="background: white !important; padding: 0 !important;">
                         {% for part in saved_response.answer.parts %}
                             <li class="submission__answer__part">
-                                <h5 class="submission__answer__part__text__title">{% trans "The question for this section" %}</h5>
-                                <article class="submission__answer__part__prompt">
-                                    <div class="submission__answer__part__prompt__copy">
+                                <h5 class="submission__answer__part__text__title">{% trans "Question for this section." %}</h5>
+                                <article class="submission__answer__part__prompt" style="background: white !important; background-color: white !important; box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important; border: 1px solid #bbb !important; border-left: 7px solid #0075B4 !important; padding: 10px !important; margin-bottom: 10px !important; border-radius: 0px !important;">
+                                    <div class="submission__answer__part__prompt__copy" style="background: white !important; padding: 0 !important; margin: 0 !important;">
                                         {% if prompts_type == 'html' %}
                                             {{ part.prompt.description|safe }}
                                         {% else %}
@@ -115,29 +149,17 @@
                                 {% if text_response %}
                                 <div class="field field--textarea submission__answer__part__text">
                                     <div class="submission__answer__part__text">
-                                        <h5 id="submission__answer__part__text__title__{{ forloop.counter }}__{{ xblock_id }}"
-                                            class="submission__answer__part__text__title">
-                                          {% if team_name %}
-                                            {% trans "Team Response " %}
-                                          {% else %}
-                                            {% trans "Your Response " %}
-                                          {% endif %}
-
-                                          {% if text_response == "required" %}
-                                            {% trans "(Required)" %}
-                                          {% elif text_response == "optional" %}
-                                            {% trans "(Optional)" %}
-                                          {% endif %}
-                                        </h5>
+                                        <!-- Response title removed -->
 
                                     </div>
                                     <textarea
                                         id="submission__answer__part__text__{{ forloop.counter }}__{{ xblock_id }}"
                                         class="submission__answer__part__text__value"
                                         data-preview="submission__{{ forloop.counter }}"
-                                        aria-labelledby="submission__answer__part__text__title__{{ forloop.counter }}__{{ xblock_id }}"
-                                        placeholder="{% trans "Enter your response to the question above." %}"
+                                        aria-label="{% trans "Response to the question above" %}"
+                                        placeholder="{% trans "Enter your response. It saves automatically and can’t be edited once submitted." %}"
                                         maxlength="100000"
+                                        style="border: 1px solid #bbb !important; padding: 8px !important; min-height: 150px !important; background-color: white !important; box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;"
                                     >{{ part.text }}</textarea>
                                 </div>
                                 {% with forloop.counter|stringformat:"s" as submission_num %}
@@ -265,17 +287,34 @@
                     <div class="message__content"></div>
                 </div>
 
-                <ul class="list list--actions">
-                    <li class="list--actions__item">
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 10px;">
+                    {% if submission_start or submission_due %}
+                    <div class="step__deadline" style="opacity: 0.7; padding-left: 0;">
+                        <span class="icon fa fa-calendar" aria-hidden="true" style="margin-right: 5px;"></span>
+                        {% if submission_start %}
+                            {# Translators: This string displays a date to the user, then tells them the time until that date.  Example: "available August 13th, 2014 (in 5 days and 45 minutes)" #}
+                            {% blocktrans with start_date=submission_start|timezone:"UTC"|date:"c" time_until=submission_start|timeuntil %}
+                            <span id="oa_step_deadline_response" class="date ora-datetime" data-datetime="{{ start_date }}" data-string="available {date} (in {{ time_until }})" data-timezone="{{ user_timezone }}" data-language="{{ user_language }}"></span>
+                            {% endblocktrans %}
+                        {% elif submission_due %}
+                            {# Translators: This string displays a date to the user, then tells them the time until that date.  Example: "due August 13th, 2014 (in 5 days and 45 minutes)" #}
+                            {% blocktrans with due_date=submission_due|timezone:"UTC"|date:"c" time_until=submission_due|timeuntil %}
+                            <span id="oa_step_deadline_response" class="date ora-datetime" data-datetime="{{ due_date }}" data-string="Due {date} (in {{ time_until }})" data-timezone="{{ user_timezone }}" data-language="{{ user_language }}"></span>
+                            {% endblocktrans %}
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <div></div>
+                    {% endif %}
+                    <div>
                         <button type="submit" class="action action--submit step--response__submit"
                                 text_response="{{text_response}}"
                                 file_upload_response="{{file_upload_response}}"
                                 allow_learner_resubmissions="{{allow_learner_resubmissions}}"
                                 >
-                            {% trans "Submit your response and move to the next step" %}
+                            {% trans "Submit your Response" %}
                         </button>
-                    </li>
-                </ul>
+                    </div>
             </div>
             <div class="step--response__dialog-confirm dialog-confirm">
               <p class="dialog-text"></p>

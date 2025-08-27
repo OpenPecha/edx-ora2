@@ -1,5 +1,7 @@
-{% load i18n %}
+{% load i18n static %}
 {% spaceless %}
+<!-- Add Font Awesome CSS to ensure icons render properly in LMS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <!--
   Hosts the frontend templates for both the new and old ORA experiences.
   If the new views are not enabled, `.ora-view` will be hidden, otherwise, `.ora-legacy-view`
@@ -16,15 +18,7 @@
 
         <div class="wrapper-openassessment__message">
           {% block message %}
-          <div class="openassessment__message message">
-            <div class="message__content">
-              <p>
-                {% blocktrans with start_tag="<strong>"|safe end_tag="</strong>"|safe %}
-                  Please respond to the question below. Your response will be saved automatically and {{ start_tag }}cannot be edited once submitted{{ end_tag }}.
-                {% endblocktrans %}
-              </p>
-            </div>
-          </div>
+
           {% endblock %}
         </div>
 
