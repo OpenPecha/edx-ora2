@@ -32,8 +32,18 @@ def render_staff_assessment(api_data):
     Assessment XBlock. See OpenAssessmentBlock.render_assessment() for
     more information on rendering XBlock sections.
     """
-    path, context_dict = staff_path_and_context(api_data)
-    return api_data.config_data.render_assessment(path, context_dict)
+    try:
+        path, context_dict = staff_path_and_context(api_data)
+        return api_data.config_data.render_assessment(path, context_dict)
+    except Exception as ex:
+        logger.exception("Error rendering staff assessment: %s", ex)
+        # Return a minimal error template that won't break the UI
+        error_path = "legacy/staff/oa_staff_grade_error.html"
+        error_context = {
+            "error_msg": "Unable to load staff assessment. Please refresh the page.",
+            "xblock_id": api_data.config_data.get_xblock_id()
+        }
+        return api_data.config_data.render_assessment(error_path, error_context)
 
 
 def staff_context(api_data):
@@ -44,7 +54,7 @@ def staff_context(api_data):
     translate = api_data.config_data.translate
 
     not_available_context = {
-        "status_value": translate("Not Available"),
+        "status_value": translate("Pending Submission"),
         "button_active": "disabled=disabled aria-expanded=false",
         "step_classes": "is--unavailable",
     }
@@ -68,7 +78,7 @@ def staff_context(api_data):
         # (because if a staff grade did exist, we would be in 'done' regardless of whether other
         # peers have assessed). Therefore we show that we are waiting on staff to provide a grade.
         context = {
-            "status_value": translate("Not Available"),
+            "status_value": translate("Pending Staff Assessment"),
             "message_title": translate("Waiting for a Staff Grade"),
             "message_content": translate(
                 "Check back later to see if a course staff member has assessed "

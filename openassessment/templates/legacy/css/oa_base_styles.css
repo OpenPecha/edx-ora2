@@ -1,0 +1,174 @@
+/* Only remove background styles for the IN PROGRESS tag */
+.step--response.is--in-progress .step__status__value .copy {
+    background-image: none !important;
+    box-shadow: none !important;
+    color: #008100 !important;
+    background-color: #e6f9e6 !important;
+    padding: 3px 8px !important;
+    border-radius: 3px !important;
+    font-weight: bold !important;
+}
+
+/* Add specific styling for the NOT AVAILABLE tag */
+.step--staff-assessment .step__status__value .copy {
+    background-color: #999999 !important;
+    color: white !important;
+    padding: 3px 8px !important;
+    border-radius: 3px !important;
+}
+/* Change the blue line to a neutral color */
+/* Target all possible elements that could create the blue line */
+.openassessment *::before,
+.openassessment *::after,
+.step--response::before,
+.step--response::after,
+.is--in-progress::before,
+.is--in-progress::after,
+.openassessment__steps__step::before,
+.openassessment__steps__step::after {
+    border-top-color: #ddd !important;
+}
+
+/* Specifically target the blue line */
+.openassessment .step.is--in-progress,
+.openassessment .openassessment__steps__step.is--in-progress,
+.openassessment .step--response.is--in-progress,
+.step.is--in-progress,
+.openassessment__steps__step.is--in-progress,
+.step--response.is--in-progress {
+    border-top: 1px solid #ddd !important;
+    border-top-color: #ddd !important;
+}
+/* Keep the top border but change its color */
+.wrapper--xblock.wrapper--openassessment .in-progress,
+.wrapper--xblock.wrapper--openassessment .openassessment__steps__step.is--in-progress,
+.wrapper--xblock.wrapper--openassessment .step--response.is--in-progress {
+    border-top: 1px solid #ddd !important;
+}
+
+/* Hide the blue progress bar at the top of the page */
+.wrapper--xblock.wrapper--openassessment .in-progress::before,
+.wrapper--xblock.wrapper--openassessment .openassessment__steps__step.is--in-progress::before,
+.wrapper--xblock.wrapper--openassessment .step--response.is--in-progress::before {
+    display: none !important;
+}
+/* Direct override for the blue progress bar */
+.openassessment .openassessment__steps__step,
+.openassessment .step--response,
+.openassessment__steps__step,
+.step--response,
+li.openassessment__steps__step,
+li.step--response {
+    border-top: 0 !important;
+}
+
+/* Override any pseudo-elements that might be creating the line */
+.openassessment .openassessment__steps__step::before,
+.openassessment .step--response::before,
+.openassessment__steps__step::before,
+.step--response::before,
+li.openassessment__steps__step::before,
+li.step--response::before {
+    display: none !important;
+    content: none !important;
+}
+/* Hide the blue progress bar at the top */
+.openassessment .openassessment__steps__step.is--in-progress,
+.openassessment .step--response.is--in-progress {
+    border-top-width: 0 !important;
+}
+
+/* Hide the blue progress bar at the top */
+.openassessment .openassessment__steps__step.is--in-progress::before,
+.openassessment .step--response.is--in-progress::before {
+    display: none !important;
+}
+/* Override the blue progress bar at the very top */
+.in-progress,
+.openassessment li.openassessment__steps__step.step--response.is--in-progress::before,
+.openassessment li.step--response.is--in-progress::before,
+.openassessment .step--response.is--in-progress::before,
+.openassessment .openassessment__steps__step.is--in-progress::before {
+    display: none !important;
+    border-top: none !important;
+    border-top-color: transparent !important;
+    content: none !important;
+}
+
+/* Target the specific blue line at the top */
+.openassessment__steps__step:before,
+.step--response:before,
+.openassessment__steps__step.is--in-progress:before,
+.step--response.is--in-progress:before {
+    display: none !important;
+    border-top: none !important;
+    content: none !important;
+}
+/* Super aggressive overrides to remove all grey backgrounds */
+.openassessment .submission__answer__part__prompt,
+.openassessment .peer-assessment__display__response,
+.openassessment .self-assessment__display__response,
+.openassessment .ui-well,
+.openassessment [class*="ui-well"],
+.openassessment .submission__answer__part__prompt__value,
+.openassessment .submission__answer__part__prompt__copy,
+.openassessment .field--textarea .submission__answer__part__text__value,
+.openassessment .step__content .submission__answer__part__prompt,
+.openassessment .step__content .submission__answer__part__text,
+.openassessment .step--response .response__submission__content .submission__answer__part__text,
+.openassessment .step--response .response__submission {
+    background: white !important;
+    background-color: white !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Remove blue progress line at the top - aggressive approach */
+.openassessment .step.is--in-progress,
+.openassessment .openassessment__steps__step.is--in-progress,
+.openassessment .step--response.is--in-progress,
+.openassessment li.openassessment__steps__step.is--in-progress,
+.openassessment li.step--response.is--in-progress,
+.step--response.is--in-progress,
+.is--in-progress {
+    border-top: none !important;
+    border-top-color: transparent !important;
+    border-top-width: 0 !important;
+    border-top-style: none !important;
+}
+
+/* Style the question box with a border but white background */
+.openassessment .submission__answer__part__prompt,
+.openassessment .step__content .submission__answer__part__prompt,
+article.submission__answer__part__prompt {
+    background: white !important;
+    background-color: white !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+    border: 1px solid #bbb !important;
+    border-left: 7px solid #999 !important;
+    padding: 10px !important;
+    margin-bottom: 10px !important;
+    border-radius: 3px !important;
+}
+
+/* Reset any padding on the response submission container */
+.openassessment .step--response .response__submission {
+    padding: 0 !important;
+    background: white !important;
+}
+
+/* Style the textarea with a light border for usability */
+.openassessment textarea.submission__answer__part__text__value {
+    border: 1px solid #bbb !important;
+    padding: 8px !important;
+    min-height: 150px !important;
+    background-color: white !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+}
+
+/* Fix placeholder opacity */
+.openassessment textarea::placeholder {
+    opacity: 0.3 !important;
+}

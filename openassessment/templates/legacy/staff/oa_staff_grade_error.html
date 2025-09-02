@@ -1,0 +1,21 @@
+{% load i18n %}
+
+<div id="openassessment__staff-area" class="step step--staff-assessment is--showing">
+    <header class="step__header">
+        <h2 class="step__title">
+            <span class="wrapper--copy">
+                {% trans "Staff Assessment" %}
+            </span>
+        </h2>
+    </header>
+
+    <div class="step__content">
+        <div class="wrapper--staff-assessment">
+            <div class="staff-assessment__error ui-slidable__content" aria-labelledby="oa_staff_grade_{{ xblock_id }}">
+                <div class="staff-assessment__error-message">
+                    <p>{{ error_msg }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
